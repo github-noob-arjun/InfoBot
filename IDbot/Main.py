@@ -74,13 +74,13 @@ BACK_BUTTON = InlineKeyboardMarkup(
         ]
     ]
 )
-@Client.on_callback_query(filters.regex(r"^next"))
+@IDBot.on_callback_query(filters.regex(r"^next"))
 async def next(bot, msg):
     await msg.message.edit(
         text=NEXT_TEXT,
         reply_markup=BACK_BUTTON,
     )
-@Client.on_callback_query(filters.regex(r"^start"))
+@IDBot.on_callback_query(filters.regex(r"^start"))
 async def back(bot, msg):
     await msg.message.edit(
         text=START_TEXT.format(msg.from_user.mention),
