@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='IDbot',
-      version='0.3.1',
+      version='0.3.2',
       description='Python module for interacting with Chatbase APIs',
       url='https://github.com/github-noob-arjun/InfoBot',
       author='Github',
