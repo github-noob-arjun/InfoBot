@@ -5,6 +5,12 @@ from pyrogram.types import User, InlineKeyboardMarkup, InlineKeyboardButton, Mes
 from pyrogram.raw import functions
 from pyrogram.errors import PeerIdInvalid
 
+IDBot = Client(
+      "IdFinder",
+      bot_token="5462550605:AAFyN7tH6mX-MCNybfOMv1K71kt9or0v0AA",
+      api_id="4738674",
+      api_hash="f2be74eaa9b1cb32498f45d04e4dbb54",
+)
 
 BUTTON_1 = InlineKeyboardMarkup( [[
        InlineKeyboardButton("✅ 𝗝𝗼𝗶𝗻 𝗡𝗼𝘄 ✅", url="https://t.me/PyroBotz")
