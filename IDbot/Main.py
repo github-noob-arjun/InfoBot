@@ -17,8 +17,7 @@ BUTTON_1 = InlineKeyboardMarkup( [[
        ]]
        )
 
-INFO_TEXT = """
-<u>💫 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧</u>
+INFO_TEXT = """<u>💫 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧</u>
 
  🙋🏻‍♂️ 𝐅𝐢𝐫𝐬𝐭 𝐍𝐚𝐦𝐞 : <b>{}</b>
  🧖‍♂️ 𝐒𝐞𝐜𝐨𝐧𝐝 𝐍𝐚𝐦𝐞 : <b>{}</b>
@@ -48,6 +47,8 @@ async def id_handler(bot, update):
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐢𝐝𝐞𝐨 𝐍𝐨𝐭𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.video_note.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.video_note.file_unique_id}`", quote=True)
         if message.reply_to_message.voice:
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐨𝐢𝐜𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.voice.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.voice.file_unique_id}`", quote=True)
+        if message.reply_to_message.file:
+           await message.reply(f"**𝐘𝐨𝐮𝐫 𝐅𝐢𝐥𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.file.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.file.file_unique_id}`", quote=True)
     else:
         await update.reply_text(        
             text=f"🆔 𝚈𝚘𝚞𝚛 𝙸𝙳 :- `{update.from_user.id}`",
