@@ -68,7 +68,7 @@ async def id_handler(bot, update):
     else:
         last_name = "𝐍𝐨𝐧𝐞😔"
 
-    pfp = await motech.get_profile_photos(update.from_user.id)
+    pfp = await bot.get_profile_photos(update.from_user.id)
     if not pfp:
         await update.reply_text(  
             text=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
@@ -76,7 +76,7 @@ async def id_handler(bot, update):
             reply_markup=BUTTON_1
         )
     else:
-        dls = await motech.download_media(pfp[0]["file_id"], file_name=f"{update.from_user.id}.png")
+        dls = await bot.download_media(pfp[0]["file_id"], file_name=f"{update.from_user.id}.png")
         await update.reply_photo(
             photo=dls,
             caption=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
