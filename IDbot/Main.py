@@ -63,35 +63,36 @@ START_BUTTON = InlineKeyboardMarkup(
         [
             InlineKeyboardButton('✅ 𝗝𝗢𝗜𝗡 𝗡𝗢𝗪 ✅', url='https://t.me/PyroBotz')
         ],[
-            InlineKeyboardButton('Nᴇxᴛ »', callback_data='next')
+            InlineKeyboardButton('--»', callback_data='next')
         ]
     ]
 )
 BACK_BUTTON = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton('« Bᴀᴄᴋ', callback_data='start')
+            InlineKeyboardButton('«--', callback_data='start')
         ]
     ]
 )
-@IDBot.on_message(filters.private & filters.command("start"))
-async def id_handler(bot, update):
-    await update.reply_text(
-        text=START_TEXT.format(update.from_user.mention),
-        disable_web_page_preview=True,
-        quote=True,
-        reply_markup=START_BUTTON
-    )
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next(bot, msg):
     await msg.message.edit(
         text=NEXT_TEXT,
-        reply_markup=BACK_BUTTON
+        reply_markup=BACK_BUTTON,
     )
 @Client.on_callback_query(filters.regex(r"^start"))
-async def next(bot, msg):
+async def back(bot, msg):
     await msg.message.edit(
         text=START_TEXT,
+        reply_markup=START_BUTTON,
+    )
+
+@IDBot.on_message(filters.private & filters.command("start"))
+async def start(bot, update):
+    await update.reply_text(
+        text=START_TEXT.format(update.from_user.mention),
+        disable_web_page_preview=True,
+        quote=True,
         reply_markup=START_BUTTON
     )
 @IDBot.on_message(filters.private & filters.command("id"))
