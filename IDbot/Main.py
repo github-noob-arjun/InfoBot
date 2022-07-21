@@ -50,7 +50,7 @@ async def id_handler(bot, update):
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐨𝐢𝐜𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.voice.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.voice.file_unique_id}`", quote=True)
     else:
         await update.reply_text(        
-            text=f"🆔 𝚈𝚘𝚞𝚛 𝙸𝙳 :- {update.from_user.id}",
+            text=f"🆔 𝚈𝚘𝚞𝚛 𝙸𝙳 :- `{update.from_user.id}`",
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
@@ -63,12 +63,13 @@ async def id_handler(bot, update):
     )
 @IDBot.on_message(filters.group & filters.command("info"))
 async def id_handler(bot, update):
+    pfp = await bot.get_profile_photos(update.from_user.id)
+
     if update.from_user.last_name:
         last_name = update.from_user.last_name
     else:
         last_name = "𝐍𝐨𝐧𝐞😔"
 
-    pfp = await bot.get_profile_photos(update.from_user.id)
     if not pfp:
         await update.reply_text(  
             text=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
@@ -83,6 +84,7 @@ async def id_handler(bot, update):
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
+        os.remove(dls)
 @IDBot.on_message(filters.private & filters.forwarded)
 async def info(motech, msg):
     if msg.forward_from:
