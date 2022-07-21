@@ -131,6 +131,7 @@ async def id_handler(bot, update):
     )
 @IDBot.on_message(filters.private & filters.command("info"))
 async def id_handler(bot, update):
+    temp = await update.reply("`please wait...`")
     pfp = await bot.get_profile_photos(update.from_user.id)
 
     if update.from_user.last_name:
@@ -139,13 +140,14 @@ async def id_handler(bot, update):
         last_name = "𝐍𝐨𝐧𝐞😔"
 
     if not pfp:
-        await update.reply_text(  
+        await temp.edit(  
             text=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
     else:
         dls = await bot.download_media(pfp[0]["file_id"], file_name=f"{update.from_user.id}.png")
+        await temp.delete()
         await update.reply_photo(
             photo=dls,
             caption=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
@@ -155,6 +157,7 @@ async def id_handler(bot, update):
         os.remove(dls)
 @IDBot.on_message(filters.private & filters.forwarded)
 async def info(motech, msg):
+    tmp = await msg.reply_text("`please wait...`")
     if msg.forward_from:
         text = "<u>𝐅𝐨𝐫𝐰𝐚𝐫𝐝 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 👀</u> \n\n"
         if msg.forward_from["is_bot"]:
@@ -168,8 +171,9 @@ async def info(motech, msg):
             text += f'\n\n🆔 𝐈𝐃 : `{msg.forward_from["id"]}`'
         pfp = await motech.get_profile_photos(msg.forward_from["id"])
         if not pfp:
-            await msg.reply(text, reply_markup=BUTTON_1, quote=True)
+            await tmp.edit(text, reply_markup=BUTTON_1, quote=True)
         else:
+            await tmp.delete()
             dls = await motech.download_media(pfp[0]["file_id"], file_name=f"{msg.chat.id}.png")
             await msg.reply_photo(
                 photo=dls,
@@ -181,7 +185,7 @@ async def info(motech, msg):
     else:
         hidden = msg.forward_sender_name
         if hidden:
-            await msg.reply(
+            await tmp.edit(
                 f"❌️𝐄𝐫𝐫𝐨𝐫 <b><i>{hidden}</i></b> ❌️𝐄𝐫𝐫𝐨𝐫",
                 quote=True,
             )
@@ -197,5 +201,5 @@ async def info(motech, msg):
                 text += f'\n\n🆔 𝐈𝐃 : `{msg.forward_from_chat["id"]}`'
             else:
                 text += f'\n\n🆔 𝐈𝐃 `{msg.forward_from_chat["id"]}`\n\n'
-            await msg.reply(text, reply_markup=BUTTON_1, quote=True)
+            await tmp.edit(text, reply_markup=BUTTON_1, quote=True)
 
