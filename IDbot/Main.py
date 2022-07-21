@@ -47,7 +47,7 @@ I am ID Finder bot.**
 
 NEXT_TEXT = """<b><u><i>ID Features</i></u></b>
 
-**✓ Sticker ID
+<b>✓ Sticker ID
 ✓ Video ID
 ✓ Audio ID
 ✓ Video Note ID
@@ -55,7 +55,7 @@ NEXT_TEXT = """<b><u><i>ID Features</i></u></b>
 ✓ Photo ID
 ✓ Animation ID
 
-✘ File ID _(Currently Not Available)_**
+✘ File ID <i>(Currently Not Available)</i></b>
 """
 
 START_BUTTON = InlineKeyboardMarkup(
@@ -63,14 +63,14 @@ START_BUTTON = InlineKeyboardMarkup(
         [
             InlineKeyboardButton('✅ 𝗝𝗢𝗜𝗡 𝗡𝗢𝗪 ✅', url='https://t.me/PyroBotz')
         ],[
-            InlineKeyboardButton('--»', callback_data='next')
+            InlineKeyboardButton('Next »', callback_data='next')
         ]
     ]
 )
 BACK_BUTTON = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton('«--', callback_data='start')
+            InlineKeyboardButton('« Back', callback_data='start')
         ]
     ]
 )
@@ -83,7 +83,7 @@ async def next(bot, msg):
 @Client.on_callback_query(filters.regex(r"^start"))
 async def back(bot, msg):
     await msg.message.edit(
-        text=START_TEXT,
+        text=START_TEXT.format(msg.from_user.mention),,
         reply_markup=START_BUTTON,
     )
 
