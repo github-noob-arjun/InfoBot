@@ -157,7 +157,7 @@ async def id_handler(bot, update):
         os.remove(dls)
 @IDBot.on_message(filters.private & filters.forwarded)
 async def info(motech, msg):
-    tmp = await update.reply(text="`please wait...`", quote=True)
+    tmp = await msg.reply(text="`please wait...`", quote=True)
     if msg.forward_from:
         text = "<u>𝐅𝐨𝐫𝐰𝐚𝐫𝐝 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 👀</u> \n\n"
         if msg.forward_from["is_bot"]:
