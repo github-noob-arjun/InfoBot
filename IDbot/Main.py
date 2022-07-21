@@ -131,7 +131,7 @@ async def id_handler(bot, update):
     )
 @IDBot.on_message(filters.private & filters.command("info"))
 async def id_handler(bot, update):
-    temp = await update.reply("`please wait...`")
+    temp = await update.reply(text="`please wait...`", quote=True)
     pfp = await bot.get_profile_photos(update.from_user.id)
 
     if update.from_user.last_name:
@@ -157,7 +157,7 @@ async def id_handler(bot, update):
         os.remove(dls)
 @IDBot.on_message(filters.private & filters.forwarded)
 async def info(motech, msg):
-    tmp = await msg.reply_text("`please wait...`")
+    tmp = await update.reply(text="`please wait...`", quote=True)
     if msg.forward_from:
         text = "<u>𝐅𝐨𝐫𝐰𝐚𝐫𝐝 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 👀</u> \n\n"
         if msg.forward_from["is_bot"]:
