@@ -38,7 +38,9 @@ I am ID Finder bot.**
 
 **• Forward any chat message with quote To get Chat Info.
 
-• /id Use this command Group and Private To get ID
+• /id Use this command Group and Private To get ID.
+
+• /id Reply to any Media or Sticker to get ID.
 
 • /info To get Your Information. 
 
