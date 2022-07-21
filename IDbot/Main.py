@@ -171,7 +171,7 @@ async def info(motech, msg):
             text += f'\n\n🆔 𝐈𝐃 : `{msg.forward_from["id"]}`'
         pfp = await motech.get_profile_photos(msg.forward_from["id"])
         if not pfp:
-            await tmp.edit(text, reply_markup=BUTTON_1, quote=True)
+            await tmp.edit(text, reply_markup=BUTTON_1)
         else:
             await tmp.delete()
             dls = await motech.download_media(pfp[0]["file_id"], file_name=f"{msg.chat.id}.png")
@@ -187,7 +187,6 @@ async def info(motech, msg):
         if hidden:
             await tmp.edit(
                 f"❌️𝐄𝐫𝐫𝐨𝐫 <b><i>{hidden}</i></b> ❌️𝐄𝐫𝐫𝐨𝐫",
-                quote=True,
             )
         else:
             text = f"<u>𝐅𝐨𝐫𝐰𝐚𝐫𝐝 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 👀</u>.\n\n"
@@ -201,5 +200,5 @@ async def info(motech, msg):
                 text += f'\n\n🆔 𝐈𝐃 : `{msg.forward_from_chat["id"]}`'
             else:
                 text += f'\n\n🆔 𝐈𝐃 `{msg.forward_from_chat["id"]}`\n\n'
-            await tmp.edit(text, reply_markup=BUTTON_1, quote=True)
+            await tmp.edit(text, reply_markup=BUTTON_1)
 
