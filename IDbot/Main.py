@@ -105,28 +105,16 @@ async def id_handler(bot, update):
         last_name = "𝐍𝐨𝐧𝐞😔"
 
     if not pfp:
-        text += "<u>👤𝐔𝐬𝐞𝐫 𝐈𝐧𝐟𝐨</u>"
-        text += f'\n\n👨‍💼 𝐍𝐚𝐦𝐞 : {msg.from_user["first_name"]}'
-        if msg.forward_from["username"]:
-            text += f'\n\n🔗 𝐔𝐬𝐞𝐫𝐍𝐚𝐦𝐞 : @{msg.from_user["username"]} \n\n🆔 ID : <code>{msg.from_user["id"]}</code>'
-        else:
-            text += f'\n\n🆔 𝐈𝐃 : `{msg.from_user["id"]}`'
         await update.reply_text(  
-            text=text,
+            text=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
     else:
-        text += "<u>👤𝐔𝐬𝐞𝐫 𝐈𝐧𝐟𝐨</u>"
-        text += f'\n\n👨‍💼 𝐍𝐚𝐦𝐞 : {msg.from_user["first_name"]}'
-        if msg.forward_from["username"]:
-            text += f'\n\n🔗 𝐔𝐬𝐞𝐫𝐍𝐚𝐦𝐞 : @{msg.from_user["username"]} \n\n🆔 ID : <code>{msg.from_user["id"]}</code>'
-        else:
-            text += f'\n\n🆔 𝐈𝐃 : `{msg.from_user["id"]}`'
         dls = await bot.download_media(pfp[0]["file_id"], file_name=f"{update.from_user.id}.png")
         await update.reply_photo(
             photo=dls,
-            caption=text,
+            caption=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
