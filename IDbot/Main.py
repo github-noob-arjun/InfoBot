@@ -53,7 +53,7 @@ START_BUTTON = InlineKeyboardMarkup(
     ]
 )
 
-@IDBot.on_message(filters.group & filters.command("start"))
+@IDBot.on_message(filters.private & filters.command("start"))
 async def id_handler(bot, update):
     await update.reply_text(
         text=START_TEXT.format(update.from_user.mention),
@@ -95,7 +95,7 @@ async def id_handler(bot, update):
         disable_web_page_preview=True,
         reply_markup=BUTTON_1
     )
-@IDBot.on_message(filters.group & filters.command("info"))
+@IDBot.on_message(filters.private & filters.command("info"))
 async def id_handler(bot, update):
     pfp = await bot.get_profile_photos(update.from_user.id)
 
