@@ -56,6 +56,7 @@ NEXT_TEXT = """<b><u><i>ID Features</i></u></b>
 ✓ Animation ID
 
 ✘ File ID _(Currently Not Available)_**
+"""
 
 START_BUTTON = InlineKeyboardMarkup(
     [
