@@ -29,6 +29,39 @@ INFO_TEXT = """<u>💫 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐈𝐧𝐟𝐨𝐫𝐦
  🤠 𝐒𝐭𝐚𝐭𝐮𝐬 : <b>{}</b>
 """
 
+START_TEXT = """**🙌 Hello {},
+
+I am ID Finder bot.**
+
+<b><u><i>Features</i></u></b>
+
+
+**• Forward any chat message with quote To get Chat Info.
+
+• /id Use this command Group and Private To get ID
+
+• /info To get Your Information. 
+
+@Pyro_Botz**
+"""
+
+START_BUTTON = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton('✅ 𝗝𝗢𝗜𝗡 𝗡𝗢𝗪 ✅', url='https://t.me/PyroBotz')
+        ]
+    ]
+)
+
+@IDBot.on_message(filters.group & filters.command("start"))
+async def id_handler(bot, update):
+    await update.reply_text(
+        text=START_TEXT.format(update.from_user.mention),
+        disable_web_page_preview=True,
+        quote=True,
+        reply_markup=START_BUTTON
+    )
+
 @IDBot.on_message(filters.private & filters.command("id"))
 async def id_handler(bot, update):
     message=update
@@ -72,16 +105,28 @@ async def id_handler(bot, update):
         last_name = "𝐍𝐨𝐧𝐞😔"
 
     if not pfp:
+        text += "<u>👤𝐔𝐬𝐞𝐫 𝐈𝐧𝐟𝐨</u>"
+        text += f'\n\n👨‍💼 𝐍𝐚𝐦𝐞 : {msg.from_user["first_name"]}'
+        if msg.forward_from["username"]:
+            text += f'\n\n🔗 𝐔𝐬𝐞𝐫𝐍𝐚𝐦𝐞 : @{msg.from_user["username"]} \n\n🆔 ID : <code>{msg.from_user["id"]}</code>'
+        else:
+            text += f'\n\n🆔 𝐈𝐃 : `{msg.from_user["id"]}`'
         await update.reply_text(  
-            text=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
+            text=text,
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
     else:
+        text += "<u>👤𝐔𝐬𝐞𝐫 𝐈𝐧𝐟𝐨</u>"
+        text += f'\n\n👨‍💼 𝐍𝐚𝐦𝐞 : {msg.from_user["first_name"]}'
+        if msg.forward_from["username"]:
+            text += f'\n\n🔗 𝐔𝐬𝐞𝐫𝐍𝐚𝐦𝐞 : @{msg.from_user["username"]} \n\n🆔 ID : <code>{msg.from_user["id"]}</code>'
+        else:
+            text += f'\n\n🆔 𝐈𝐃 : `{msg.from_user["id"]}`'
         dls = await bot.download_media(pfp[0]["file_id"], file_name=f"{update.from_user.id}.png")
         await update.reply_photo(
             photo=dls,
-            caption=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
+            caption=text,
             disable_web_page_preview=True,
             reply_markup=BUTTON_1
         )
@@ -101,12 +146,13 @@ async def info(motech, msg):
             text += f'\n\n🆔 𝐈𝐃 : `{msg.forward_from["id"]}`'
         pfp = await motech.get_profile_photos(msg.forward_from["id"])
         if not pfp:
-            await msg.reply(text, quote=True)
+            await msg.reply(text, reply_markup=BUTTON_1, quote=True)
         else:
             dls = await motech.download_media(pfp[0]["file_id"], file_name=f"{msg.chat.id}.png")
             await msg.reply_photo(
                 photo=dls,
                 caption=text,
+                reply_markup=BUTTON_1,
                 quote=True
             )
             os.remove(dls)
@@ -129,5 +175,5 @@ async def info(motech, msg):
                 text += f'\n\n🆔 𝐈𝐃 : `{msg.forward_from_chat["id"]}`'
             else:
                 text += f'\n\n🆔 𝐈𝐃 `{msg.forward_from_chat["id"]}`\n\n'
-            await msg.reply(text, quote=True)
+            await msg.reply(text, reply_markup=BUTTON_1, quote=True)
 
