@@ -51,11 +51,10 @@ NEXT_TEXT = """<b><u><i>ID Features</i></u></b>
 ✓ Video ID
 ✓ Audio ID
 ✓ Video Note ID
-✓ voice Note ID
+✓ Voice Note ID
 ✓ Photo ID
 ✓ Animation ID
-
-✘ File ID <i>(Currently Not Available)</i></b>
+✓ Document ID</b>
 """
 
 START_BUTTON = InlineKeyboardMarkup(
@@ -113,6 +112,8 @@ async def id_handler(bot, update):
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐢𝐝𝐞𝐨 𝐍𝐨𝐭𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.video_note.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.video_note.file_unique_id}`", quote=True)
         if message.reply_to_message.voice:
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐨𝐢𝐜𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.voice.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.voice.file_unique_id}`", quote=True)
+        if message.reply_to_message.document:
+           await message.reply(f"**𝐘𝐨𝐮𝐫 𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭 𝐈𝐃 :-**  \n `{message.reply_to_message.document.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.document.file_unique_id}`", quote=True)
     else:
         await update.reply_text(        
             text=f"🆔 𝚈𝚘𝚞𝚛 𝙸𝙳 :- `{update.from_user.id}`",
