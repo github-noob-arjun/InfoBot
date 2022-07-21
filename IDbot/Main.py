@@ -115,7 +115,7 @@ async def id_handler(bot, update):
         await update.reply_photo(
             photo=dls,
             caption=INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status),             
-            disable_web_page_preview=True,
+            quote=True,
             reply_markup=BUTTON_1
         )
         os.remove(dls)
