@@ -81,7 +81,7 @@ async def id_handler(bot, update):
         if message.reply_to_message.voice:
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐨𝐢𝐜𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.voice.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.voice.file_unique_id}`", quote=True)
         if message.reply_to_message.file:
-           await message.reply(f"**𝐘𝐨𝐮𝐫 𝐅𝐢𝐥𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.file.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.file.file_unique_id}`", quote=True)
+           await message.reply(f"**𝐘𝐨𝐮𝐫 𝐅𝐢𝐥𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.file_unique_id}`", quote=True)
     else:
         await update.reply_text(        
             text=f"🆔 𝚈𝚘𝚞𝚛 𝙸𝙳 :- `{update.from_user.id}`",
