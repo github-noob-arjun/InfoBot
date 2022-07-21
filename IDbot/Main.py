@@ -45,14 +45,34 @@ I am ID Finder bot.**
 @Pyro_Botz**
 """
 
+NEXT_TEXT = """<b><u><i>ID Features</i></u></b>
+
+**✓ Sticker ID
+✓ Video ID
+✓ Audio ID
+✓ Video Note ID
+✓ voice Note ID
+✓ Photo ID
+✓ Animation ID
+
+✘ File ID _(Currently Not Available)_**
+
 START_BUTTON = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton('✅ 𝗝𝗢𝗜𝗡 𝗡𝗢𝗪 ✅', url='https://t.me/PyroBotz')
+        ],[
+            InlineKeyboardButton('Nᴇxᴛ »', callback_data='next')
         ]
     ]
 )
-
+BACK_BUTTON = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton('« Bᴀᴄᴋ', callback_data='start')
+        ]
+    ]
+)
 @IDBot.on_message(filters.private & filters.command("start"))
 async def id_handler(bot, update):
     await update.reply_text(
@@ -61,7 +81,18 @@ async def id_handler(bot, update):
         quote=True,
         reply_markup=START_BUTTON
     )
-
+@Client.on_callback_query(filters.regex(r"^next"))
+async def next(bot, msg):
+    await msg.message.edit(
+        text=NEXT_TEXT,
+        reply_markup=BACK_BUTTON
+    )
+@Client.on_callback_query(filters.regex(r"^start"))
+async def next(bot, msg):
+    await msg.message.edit(
+        text=START_TEXT,
+        reply_markup=START_BUTTON
+    )
 @IDBot.on_message(filters.private & filters.command("id"))
 async def id_handler(bot, update):
     message=update
@@ -80,8 +111,6 @@ async def id_handler(bot, update):
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐢𝐝𝐞𝐨 𝐍𝐨𝐭𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.video_note.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.video_note.file_unique_id}`", quote=True)
         if message.reply_to_message.voice:
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐕𝐨𝐢𝐜𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.voice.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.voice.file_unique_id}`", quote=True)
-        if message.reply_to_message.file:
-           await message.reply(f"**𝐘𝐨𝐮𝐫 𝐅𝐢𝐥𝐞 𝐈𝐃 :-**  \n `{message.reply_to_message.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.file_unique_id}`", quote=True)
     else:
         await update.reply_text(        
             text=f"🆔 𝚈𝚘𝚞𝚛 𝙸𝙳 :- `{update.from_user.id}`",
