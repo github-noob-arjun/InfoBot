@@ -83,7 +83,7 @@ async def next(bot, msg):
 @Client.on_callback_query(filters.regex(r"^start"))
 async def back(bot, msg):
     await msg.message.edit(
-        text=START_TEXT.format(msg.from_user.mention),,
+        text=START_TEXT.format(msg.from_user.mention),
         reply_markup=START_BUTTON,
     )
 
