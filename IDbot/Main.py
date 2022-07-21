@@ -32,6 +32,7 @@ INFO_TEXT = """
 
 @IDBot.on_message(filters.private & filters.command("id"))
 async def id_handler(bot, update):
+    message=update
     if message.reply_to_message:
         if message.reply_to_message.sticker:
            await message.reply(f"**𝐘𝐨𝐮𝐫 𝐒𝐭𝐢𝐜𝐤𝐞𝐫 𝐈𝐃 :-**  \n `{message.reply_to_message.sticker.file_id}` \n \n ** Unique ID is ** \n\n`{message.reply_to_message.sticker.file_unique_id}`", quote=True)
