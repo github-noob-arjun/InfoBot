@@ -99,7 +99,7 @@ async def info(motech, msg):
         if not pfp:
             await msg.reply(text, quote=True)
         else:
-            dls = await motech.download_media(pfp[0]["file_id"], file_name=f"{msg.forward_from["id"]}.png")
+            dls = await motech.download_media(pfp[0]["file_id"], file_name=f"{msg.chat.id}.png")
             await msg.reply_photo(
                 photo=dls,
                 caption=text,
