@@ -64,6 +64,8 @@ START_BUTTON = InlineKeyboardMarkup(
         [
             InlineKeyboardButton('✅ 𝗝𝗢𝗜𝗡 𝗡𝗢𝗪 ✅', url='https://t.me/PyroBotz')
         ],[
+            InlineKeyboardButton('🐞 𝖱𝖾𝗉𝗈𝗋𝗍 𝖡𝗎𝗀 🐞', url='https://t.me/PYRO_BOTZ_CHAT')
+        ],[
             InlineKeyboardButton('Next »', callback_data='next')
         ]
     ]
